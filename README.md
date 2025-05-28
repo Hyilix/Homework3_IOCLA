@@ -9,7 +9,7 @@ Cosminel the Passionate - Homework 3
 
 This task is about "sorting" several nodes from an array, and forming a sorted list, without swapping any elements.
 
-Here is the node structure (c language)
+Here is the node structure (c language):
 
 ```c
 struct node {
@@ -37,7 +37,7 @@ The rest is just a matter of finding the next maximum value and comparing.
 Here is an illustration for better understanding of the solution:
 
 ```
-The value will hold the address of the node in this example, for better understanding
+The value will hold the address of the node in this example, for better understanding.
 The code will set the addresses correctly, not based on int values.
 
 | value | next |                     | value | next |                     | value | next |                     | value | next |
@@ -55,7 +55,7 @@ The code will set the addresses correctly, not based on int values.
 ----------------                     ----------------                     ----------------                     ----------------
 
 Eventually, all values will be assigned correctly, and the last maximum will be the minimum.
-The address of this node will be the return value
+The address of this node will be the return value (1 in this example).
 ```
 
 Now there is no need to search for the shortest node again at the end or store the address untill the end of the sort.
@@ -91,7 +91,7 @@ The function first compares the lengths of both strings. If they are equal, **st
 
 ### Task 3 - KFfib
 
-Recursive Fibonacci with extra steps!
+Recursive Fibonacci with extra steps! (or fewer steps)
 
 For a given n and k, **kfib** function must return the nth number calculated like so:
 
@@ -113,6 +113,38 @@ And that's really it...
 
 ### Task 4 - Composite Palindrome
 
+This task is ~pain~ about finding the longest palindrome by concatenating strings from an array. 
+
 #### Subtask 1 - Palindrome Check
 
+This function takes a string and length as input and determines wether or not the string is palindrome.
+
+This is done by assuming that the input string is palindrome, then check for 2 equally distanced characters from the middle if they are equal.
+
+If one pair has different bytes (letters), the string is not palindrome and the loop will terminate early.
+
+If all pairs have equal bytes (letters), the string is (still) palindrome.
+
 #### Subtask 2 - Composite Palindrome
+
+Given an array of strings, the function **composite_palindrome** must find the longest by size, shortest lexicographically palindrome string by concatenating the strings from the array.
+
+Not all combinations of strings to concatenate are valid. Here is a short reminder:
+
+ARRAY = ["Ana", "are", "mere"]
+
+* Some valid strings: ["are"], ["Ana", "mere"], ["Ana", "are", "mere"]
+
+* Some invalid strings: ["mere", "Ana"], ["Ana", "mere", "are"]
+
+To get all valid combinations, a bitmask is used to tell the function what strings to take from the array at any time. (1 -> take string | 0 -> ignore string, for any position).
+
+Even though the tests only contain arrays with 15 elements, this bitmask implementation can, theoretically, handle arrays with 32 elements. (since I use a register for the bitmask)
+
+For each element in the array, with the help of the bitmask, all possible combinations will be created and tested for palindrome (**palindrom_check**), longest by size(**strlen** from libc) and shortest lexicographically(**strcmp** from libc). The current best string will be stored inside the EDI register.
+
+Before creating the combinations, the temp string will be malloc'ed (**malloc** from libc, **heap** allocation) with a size of 10 * array length (since all the strings have a maximum of 10). ~This will cause memory leaks~.
+
+Using the bitmask and bit shifting, specific strings will be taken and concatenated into the temp array. After that, if the temp string is palindrome, it is compared against the best string found so far.
+
+In the end, the best string will be returned.

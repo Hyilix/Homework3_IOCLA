@@ -68,11 +68,11 @@ This task is about sorting (for real this time) an array of strings. It is split
 
 Given a string as input, this function splits the string into several substrings based on delimiters.
 
-Although the delimiters are fixed " .,\n", in .text section there is the array that holds all possible delimiters, and can be modified freely (the size of this array is calculated dinamically).
+Although the delimiters are fixed " .,\n", in .text section there is the array that holds all possible delimiters, and can be modified freely (the size of this array is calculated dynamically).
 
 What this function does is taking the first valid byte (letter) that is not a delimiter, saving the position of it as start of word, and finding the end of word that is a delimiter.
 
-The new string is dinamically malloc'ed (using the **malloc** function from libc), and all the bytes from the start position to end position will be copied inside the string.
+The new string is dynamically malloc'ed (using the **malloc** function from libc), and all the bytes from the start position to end position will be copied inside the string.
 The string is saved into the array of strings, ready to be used by the **sort** function.
 
 A custom function was used (**func_is_delimiter**) that returns if a byte (letter) is inside the delimiter string (check if a letter is a delimiter or not).
@@ -113,11 +113,11 @@ And that's really it...
 
 ### Task 4 - Composite Palindrome
 
-This task is ~pain~ about finding the longest palindrome by concatenating strings from an array. 
+This task is about finding the longest palindrome by concatenating strings from an array. 
 
 #### Subtask 1 - Palindrome Check
 
-This function takes a string and length as input and determines wether or not the string is palindrome.
+This function takes a string and length as input and determines whether or not the string is palindrome.
 
 This is done by assuming that the input string is palindrome, then check for 2 equally distanced characters from the middle if they are equal.
 
@@ -141,7 +141,7 @@ To get all valid combinations, a bitmask is used to tell the function what strin
 
 Even though the tests only contain arrays with 15 elements, this bitmask implementation can, theoretically, handle arrays with 32 elements. (since I use a register for the bitmask)
 
-For each element in the array, with the help of the bitmask, all possible combinations will be created and tested for palindrome (**palindrom_check**), longest by size(**strlen** from libc) and shortest lexicographically(**strcmp** from libc). The current best string will be stored inside the EDI register.
+For each element in the array, with the help of the bitmask, all possible combinations will be created and tested for palindrome (**palindrome_check**), longest by size(**strlen** from libc) and shortest lexicographically(**strcmp** from libc). The current best string will be stored inside the EDI register.
 
 Before creating the combinations, the temp string will be malloc'ed (**malloc** from libc, **heap** allocation) with a size of 10 * array length (since all the strings have a maximum of 10). ~This will cause memory leaks~.
 

@@ -93,6 +93,24 @@ The function first compares the lengths of both strings. If they are equal, **st
 
 Recursive Fibonacci with extra steps!
 
+For a given n and k, **kfib** function must return the nth number calculated like so:
+
+```
+             { 0,                                                           n < k
+kfib(n, k) = { 1,                                                           n == k
+             { sum = kfib(n - 1, k) + kfib(n - 2, k) + .. + kfib(n - k, k), n > k
+```
+
+Thus, the **kfib** function can return:
+
+* 0
+* 1
+* sum, which is calculated *recursively* using the kfib function
+
+So, the kfib function has a comparison for returning either 0 or 1, and a *for loop* for calculating the sum by recursively getting the next element. 
+
+And that's really it...
+
 ### Task 4 - Composite Palindrome
 
 #### Subtask 1 - Palindrome Check

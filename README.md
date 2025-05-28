@@ -62,9 +62,36 @@ Now there is no need to search for the shortest node again at the end or store t
 
 ### Task 2 - Operations
 
+This task is about sorting (for real this time) an array of strings. It is split in two functions (**get_words** and **sort**), and requires the use of **qsort** from libc.
 
+#### get_words
+
+Given a string as input, this function splits the string into several substrings based on delimiters.
+
+Although the delimiters are fixed " .,\n", in .text section there is the array that holds all possible delimiters, and can be modified freely (the size of this array is calculated dinamically).
+
+What this function does is taking the first valid byte (letter) that is not a delimiter, saving the position of it as start of word, and finding the end of word that is a delimiter.
+
+The new string is dinamically malloc'ed (using the **malloc** function from libc), and all the bytes from the start position to end position will be copied inside the string.
+The string is saved into the array of strings, ready to be used by the **sort** function.
+
+A custom function was used (**func_is_delimiter**) that returns if a byte (letter) is inside the delimiter string (check if a letter is a delimiter or not).
+This eases up and makes for a more modularized solution for the **get_words** method.
+
+#### sort
+
+Given the array of strings computed by the **get_words** method, this function sorts the container using the **qsort** function. Qsort requires the container to sort, the length of the container, the size of each element and the function to use for comparison.
+The function used is the custom made **func_compare_words**;
+
+#### func_compare_words
+
+The strings must be sorted first by lowest size (**strlen** from libc), then by lowest lexicographically (**strcmp** from libc).
+
+The function first compares the lengths of both strings. If they are equal, **strcmp** is called to determine which is "lower".
 
 ### Task 3 - KFfib
+
+Recursive Fibonacci with extra steps!
 
 ### Task 4 - Composite Palindrome
 
